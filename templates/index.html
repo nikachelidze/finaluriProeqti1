@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+<!-- {% url 'login' %}
+{% url 'registracia' %}
+-->
+{% block content %}
+{% load static %}
+    <header id="header">
+        <!-- <h1> მანქანის მწარმოებლები bmw ლამბორჯინი მუსტანგი იაგუარი</h1> -->
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">მთავარი</a></li>
+                <li><a href="#">პროექტის შესახებ</a></li>
+                {% if user.is_autenticated %}
+                    <li><a href="#">შესვლა</a></li>
+                {%else%}
+                    <li><a href="{% url 'login' %}">შესვლა</a></li>
+                    <li><a href="{% url 'registracia' %}">რეგისტრაცია</a></li>
+                {%endif%}
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="mshobeli">
+            <div class="texsti">
+                <div class="avtoo">
+                    <img src="{% static 'img/icons/sedan.png' %}" alt="dfdsfs" class="avto avto1" style="width: 5%;" > 
+                    <img src="{% static 'img/icons/sedan.png' %}" alt="dfdsfs" class="avto avto2" style="width: 5%;" > 
+                    <img src="{% static 'img/icons/sedan.png' %}" alt="dfdsfs" class="avto avto3" style="width: 5%;" > 
+                    <img src="{% static 'img/icons/sedan.png' %}" alt="dfdsfs" class="avto avto4" style="width: 5%;" > 
+                </div>
+                <p>ინფორმაცია შენთვის ფავორიტი</p>
+                <p>მანქანის შესახებ</p>
+            </div>
+            <div class="slaiderimshobeli">
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/BMW/m5.jpg' %}" alt="bnw m5" style="width: 100%;">
+                    
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/mustangi/mustangi3.jpg' %}" alt="ford mustang" style="width: 100%;">
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/lamborgini/lamborgin3.jpg' %}" alt="lambogin" style="width: 100%;">
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/jaguar/jaguar.jpg' %}" alt="jaguar" style="width: 100%;">
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/camaro/camaro.jpg' %}" alt="shevrolet camaro" style="width: 100%;">
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/dodge/mazerati.jpg' %}" alt="mazerati" style="width: 100%;">
+                </div>
+                <div class="slidershvili animacia">
+                    <img src="{% static 'img/dodge/mazerati1.jpg' %}" alt="mazerati" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

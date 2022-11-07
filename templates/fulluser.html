@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+
+<main>
+    {% csrf_token %}
+    <h3 style="color: brown; margin: 50px;;">იუზერების სია</h3>
+    <div>
+        {% for user in users %}
+            <p style="width: 30%; margin-left: 50px;" >{{user.username}} == {{user.first_name}} {{user.last_name}} == {{user.email}}</p> 
+        {%endfor%}  
+    </div>
+
+
+    <div>
+        {% csrf_token %}
+        {% for comment in comments %}
+        <p>ვერ გავიგე ვერაფერი </p>
+        <p style="width: 350px; margin-left: 220px;" >{{comment.post}}</p>
+        <p style="width: 350px; margin-left: 220px;" >{{comment.user}}</p> 
+        <p style="width: 350px; margin-left: 220px;">{{comment.texti}}</p>   
+        {%endfor%}
+
+    </div>
+    <div style="margin-left: 50px;">
+        <form action="{% url 'delete' %}" method="post" >
+            {% csrf_token %}
+            <input type="number" name="pk" >
+            <button>წაშლა</button>
+        </form>
+    </div>
+</main>    
+{% endblock %}

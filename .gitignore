@@ -1,0 +1,6 @@
+.venv/
+.vscode/
+
+*.sqlite3
+static/
+__pycache__/

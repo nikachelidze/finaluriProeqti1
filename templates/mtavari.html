@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    <header >
+        <nav class="navbar navbar-inverse"></nav>
+            <ul class="nav navbar-nav">
+                <li><a href="#">BMW</a></li>
+                <li><a href="#">lamborgini</a></li>
+                <li><a href="#">mustang</a></li>
+                <li><a href="#">jaguar</a></li>
+                <li><a href="{% url 'home' %}">გასვლა</a></li>
+                <li><a href="{% url 'fulluser' %}">წაშლა</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="mtavarigverdi" style="display: flex;">
+            <div class="marcxena" style="width: 400px; background-color: #FFEABD; border: 4px double rgb(0, 0, 0);">
+                <div class="avatar" >
+                    <img src="{% static 'img/BMW/BMW.png' %}" alt="BMW" style="width: 150px; height: 150px; margin: 20px 110px" >
+                </div>
+                <div class="piradi" style="margin: 50px 30px;">
+                  <h2><a href="{% static 'BMW-istoria.html' %}" style="font-size:22px;">BMW-ს დაარსების ისტორია </a></h2>
+                </div>
+                <div class="kategoriebi">
+                   <h3>
+                        <a href="{% static 'bmw8.html' %}" style="margin: 50px 100px; font-size:18px;">BMW M8 sport</a></h2><br><br>
+                    </h3>
+                    <h3>
+                        <a href="{% static 'bmwx5.html' %}"style="margin: 50px 110px; font-size:18px;" >BMW x5 E70</a><br><br>
+                    </h3>
+                    <h3>
+                        <a href="{% static 'bmwx6.html' %}" style="margin: 50px 120px; font-size:18px;">BMW x6  </a><br><br>
+                    </h3>
+                </div>
+            </div>
+            <div class="marjvena" style="width: 100%; background-color: #ffffcc; border: 4px double #000000;
+                        display: flex; flex-wrap: wrap; margin-bottom: 40px;">
+                    {% csrf_token %}
+                    {% for car in cars %}
+                    <div>
+                        <img src="{{car.img.url}}"  style="width: 90%; height: 250px; margin: 20px;" >
+                        <p style="width: 30%; margin-left: 20px;" >{{car.modeli}}</p> 
+                        <p style="width: 350px; margin-left: 20px;">{{car.texti}}</p>   
+                    </div>
+                    {%endfor%}    
+            </div>
+        </div>
+        <div >
+            <h3 style="margin-left: 380px; background-color: #79B331;"> კომენტარი: </h3>
+            <div style="border: 4px double #000000; margin-left: 380px; width: 100%; background-color: #ffffcc;">
+                <p>ვერ გავიგე ვერაფერი </p>
+                <!-- {% for comment in comment %}
+                <div>
+                    <p style="width: 350px; margin-left: 220px;" >{{comment.Post}}</p>
+                    <p style="width: 350px; margin-left: 220px;" >{{comment.user}}</p> 
+                    <p style="width: 350px; margin-left: 220px;">{{comment.texti}}</p>   
+                </div>
+                {%endfor%} -->
+                {% csrf_token %}
+                {% for user in users %}
+                    <p style="width: 30%; margin-left: 50px;" >{{user.username}} == {{user.first_name}} {{user.last_name}} == {{user.email}}</p> 
+                {%endfor%}  
+            </div>
+        </div>
+        <div class="koment-popup" id="myForm"
+             style="display: none; position: fixed; bottom: 0; left: 15px;
+                    border: 3px solid #f1f1f1; z-index: 9;">
+            <form action="{% url 'comment' %}" class="form-container" method="post"
+                  style="max-width: 300px; padding: 10px; background-color: white; color:
+                        white; padding: 16px 20px;
+                        border: none; cursor: pointer; width: 100%;  margin-bottom:10px;
+                        opacity: 0.8; font-size: 18px; border-radius: 20px;">
+                <div class="sasaubrosatauri" style="display: flex; background-color: #a77500;">
+                    <div class="">
+                        <img src="img/icons/group.png" alt="" 
+                             style="width: 15px; height: 25px; margin-left: 10px; background-color: #a77500;">
+                    </div>
+                    <div class="sasaubrosurati" style="padding-left: 30px;">
+                        <h3>კომენტარი</h3>
+                    </div>
+                </div>
+                <textarea placeholder="ტექსტის ჩასაწერი..." name="msg" required
+                          style="width: 100%; padding: 15px; margin: 5px 0 22px 0; border: none;
+                                 background: #ffffcc; resize: none; min-height: 200px;"></textarea>
+                <button type="submit" class="btn"
+                        style="color: white; padding: 16px 20px;
+                               border: none; cursor: pointer; width: 100%;  margin-bottom:10px;
+                               opacity: 0.8; font-size: 18px; border-radius: 20px; background-color:#79B331;"
+                >გაგზავნა</button>
+                <button type="button" class="btn cancel" onclick="sasaubrosdaxurva()"
+                        style=" color: white; padding: 16px 20px;
+                                border: none; cursor: pointer; width: 100%;  margin-bottom:10px;
+                                opacity: 0.8; font-size: 18px; border-radius: 20px; background-color: #ff0000;"
+                >დახურვა</button>
+            </form>
+        </div>
+    </main>
+    <footer class="footkon" id="fotter">
+        <div id="foot"></div>
+        <button class="sasaubro koment" onclick="sasaubrosgaxsna()"
+                style="background-color: #555; color: rgb(0, 250, 0); font-size: 18px;
+                padding: 12px 20px; border: none; cursor: pointer; opacity: 0.8; position: fixed;
+                bottom: 10px; right: 28px; width: 280px;  left: 28px;">დატოვე კომენტარი</button>
+    </footer>
+{% endblock %}
